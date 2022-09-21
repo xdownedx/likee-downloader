@@ -48,3 +48,10 @@ chmod +x downloader.py
 | *-s/--screenshot* | capture a screenshot of the target's profile (bonus feature) |
 | *-d/--debug* | enable debug mode |
 | *-v/--version*   | show program's version number and exit |
+
+# Donations
+If you would like to donate, you could Buy A Coffee for the developer using the button below
+
+<a href="https://www.buymeacoffee.com/189381184" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+Your support will be much appreciated!
