@@ -57,4 +57,3 @@ If you would like to donate, you could Buy A Coffee for the developer using the 
 <a href="https://www.buymeacoffee.com/189381184" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 Your support will be much appreciated!
-![test](https://user-images.githubusercontent.com/74001397/191549711-5fd87110-ef55-4dc0-9d96-a1ef3090704a.png)
