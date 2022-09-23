@@ -11,10 +11,10 @@ from selenium.webdriver.common.by import By
 class LikeeDownloader:
 
     def __init__(self, args):
-        self.program_version_number = "2022.1.0.0"
         self.option = webdriver.FirefoxOptions()
         self.option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=self.option)
+        self.program_version_number = "2022.1.0.0"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/Likee-Downloader/releases/latest"
@@ -47,7 +47,7 @@ class LikeeDownloader:
                     with open(file, "wb") as f:
                         f.write(data.content)
                         f.close()
-                print(f"Updated!: ")
+                exit(f"Updated: Re-run program.")
             else:
                 pass
 
@@ -117,19 +117,16 @@ class LikeeDownloader:
 parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mwewa ')
 parser.add_argument('username', help='specify target username')
 parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
-parser.add_argument('-d', '--debug', help='enable debug mode', action='store_true')
 parser.add_argument('-v', '--version', version='2022.1.0.0', action='version')
 args = parser.parse_args()
-
-if args.debug:
-    logging.basicConfig(format='[%(asctime)s] %(message)s', datefmt='%I:%M:%S%p', level=logging.DEBUG)
+logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level='NOTSET')
 
 if __name__ == "__main__":
     try:
         LikeeDownloader(args).download_user_videos()
 
     except KeyboardInterrupt:
-        print("[!] Process interrupted with Ctrl+C.")
+        logging.warning("Process interrupted with Ctrl+C.")
 
     except Exception as e:
-        print(f"[x] An error occured: {e}")
+        logging.error(f"An error occured: {e}")
