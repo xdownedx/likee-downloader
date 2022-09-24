@@ -47,20 +47,20 @@ class LikeeDownloader:
                     with open(file, "wb") as f:
                         f.write(data.content)
                         f.close()
-                exit(f"Updated: Re-run program.")
+                logging.info(f"Updated: Re-run program.");exit()
             else:
                 pass
 
 
     def capture_screenshot(self):
-        print("\n[~] Capturing profile screenshot:", args.username)
+        logging.info("Capturing profile screenshot:", args.username)
         self.driver.get(self.user_profile_url.format(args.username))
         self.driver.get_screenshot_as_file(f"downloads/screenshots/{args.username}_likee-downloader.png")
-        print(f"[~] Captured: downloads/screenshots/{args.username}_likee-downloader.png")
+        logging.info(f"Captured: downloads/screenshots/{args.username}_likee-downloader.png")
 
 
     def get_user_id(self):
-        print("\n[~] Obtaining userId (This may take a while)...", end='')
+        logging.info("Obtaining userId (This may take a while)...")
         response = requests.get(f"{self.user_profile_url.format(args.username)}/video/{self.get_user_videoId()}")
         regex_pattern = re.compile('window.data = ({.*?});', flags=re.DOTALL | re.MULTILINE)
         str_data = regex_pattern.search(response.text).group(1)
@@ -72,7 +72,7 @@ class LikeeDownloader:
                    "tabType": 0,
                    "uid": json_data['uid']
                    }
-        print("\n[+] userId obtained:", json_data['uid'])
+        logging.info(f"userId obtained: {json_data['uid']}")
         return payload
 
     
@@ -96,7 +96,7 @@ class LikeeDownloader:
 
         response = requests.post(self.user_videos_api_endpoint, json=self.get_user_id()).json()
         videos = response['data']['videoList']
-        print(f'\n[+] Found {len(videos)} videos\n')
+        logging.info(f'Found {len(videos)} videos\n')
         downloaded_videos = 0
         for video in videos[:10]:
             # Printing video information
@@ -111,7 +111,7 @@ class LikeeDownloader:
                         file.write(chunk)
 
             print(f"Downloaded: {file.name}\n")
-        print(f"[+] Complete: {downloaded_videos}/{len(videos)} videos were downloaded.")
+        logging.info(f"Complete: {downloaded_videos}/{len(videos)} videos were downloaded.")
 
 
 parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mwewa ')
@@ -121,9 +121,9 @@ parser.add_argument('-d', '--debug', help='enable debug mode', action='store_tru
 parser.add_argument('-v', '--version', version='2022.1.0.0', action='version')
 args = parser.parse_args()
 if args.debug:
-    logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level=logging.DEBUG)
+    logging.basicConfig(format='[%(asctime)s] %(message)s', datefmt='%I:%M:%S%p', level=logging.DEBUG)
 else:
-    logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level=logging.INFO)  
+    logging.basicConfig(format='[%(asctime)s] %(message)s', datefmt='%I:%M:%S%p', level=logging.INFO)  
 
 if __name__ == "__main__":
     try:
@@ -133,4 +133,4 @@ if __name__ == "__main__":
         logging.warning("Process interrupted with Ctrl+C.")
 
     except Exception as e:
-        logging.error(e)
+        logging.error(f"An error occured: {e}")
