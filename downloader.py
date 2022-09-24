@@ -117,9 +117,13 @@ class LikeeDownloader:
 parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mwewa ')
 parser.add_argument('username', help='specify target username')
 parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
+parser.add_argument('-d', '--debug', help='enable debug mode', action='store_true')
 parser.add_argument('-v', '--version', version='2022.1.0.0', action='version')
 args = parser.parse_args()
-logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level='NOTSET')
+if args.debug:
+    logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level=logging.DEBUG)
+else:
+    logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%I:%M:%S%p', level=logging.INFO)  
 
 if __name__ == "__main__":
     try:
@@ -129,4 +133,4 @@ if __name__ == "__main__":
         logging.warning("Process interrupted with Ctrl+C.")
 
     except Exception as e:
-        logging.error(f"An error occured: {e}")
+        logging.error(e)
