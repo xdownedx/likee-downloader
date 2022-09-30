@@ -1,4 +1,5 @@
 import re
+import time
 import json
 import requests
 import argparse
@@ -78,6 +79,7 @@ def get_user_videoId(username):
     In order to get the videoId, we have to click on a video,
     in this case we click on the first video
     """
+    time.sleep(20)
     first_video_element = driver.find_element(By.XPATH, '//div[@class="card-video poster-bg"]')
     first_video_element.click()
     video_id = driver.current_url[-19:]
