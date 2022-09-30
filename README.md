@@ -48,7 +48,6 @@ chmod +x downloader.py
 | Flag | Description |
 |---------|:-----------:|
 | *-s/--screenshot* | capture a screenshot of the target's profile (bonus feature) |
-| *-d/--debug*   | enable debug mode |
 | *-v/--version*   | show program's version number and exit |
 
 # Donations
