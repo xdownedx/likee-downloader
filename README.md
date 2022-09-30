@@ -16,7 +16,7 @@ cd Likee-Downloader
 
 **3. Install dependencies**
 ## Note
-> *This will install tqdm and selenium, and requests*
+> *This will install tqdm, selenium, and requests*
 > > *You will need to have Firefox installed to run the program*
 > > > *For user convenience, the program will come with a geckodriver.exe binary*
 ```
