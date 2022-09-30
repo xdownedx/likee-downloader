@@ -1,5 +1,5 @@
 from downloader import download_user_videos
      
 def test_download_user_videos():
-    username = 'ulvaatkins'
+    username = 'Baselrajab'
     download_user_videos(username, screenshot=None)
