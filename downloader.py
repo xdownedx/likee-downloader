@@ -119,7 +119,7 @@ screenshot = args.screenshot
 
 if __name__ == "__main__":
     try:
-        #check_and_get_updates()
+        check_and_get_updates()
         download_user_videos(username, screenshot)
 
     except KeyboardInterrupt:
