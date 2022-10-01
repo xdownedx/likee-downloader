@@ -11,7 +11,7 @@ from selenium.webdriver.common.by import By
 option = webdriver.FirefoxOptions()
 option.add_argument('--headless')
 driver = webdriver.Firefox(options=option)
-program_version_number = "2022.1.0.0"
+program_version_number = "2022.1.1.0"
 user_profile_url = "https://likee.video/@{}"
 user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
 update_check_endpoint = "https://api.github.com/repos/rly0nheart/Likee-Downloader/releases/latest"
@@ -87,7 +87,7 @@ def get_user_videoId(username):
     return video_id
 
  
-def download_user_videos(username, screenshot):
+def download_user_videos(username, screenshot, videos_count):
     if screenshot:
         capture_screenshot()
 
@@ -95,7 +95,7 @@ def download_user_videos(username, screenshot):
     videos = response['data']['videoList']
     print(f'Found {len(videos)} videos\n')
     downloaded_videos = 0
-    for video in videos[:10]:
+    for video in videos[:videos_count]:
         # Printing video information
         print(video['msgText'])
         for video_key, video_value in video.items():
@@ -114,15 +114,17 @@ def download_user_videos(username, screenshot):
 parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mwewa ')
 parser.add_argument('username', help='specify target username')
 parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
-parser.add_argument('-v', '--version', version='2022.1.0.0', action='version')
+parser.add_argument('-c', '--videos-count', help='number of videos to download (default: %(default)s)', default=10, dest='videos_count', type=int)
+parser.add_argument('-v', '--version', version='2022.1.1.0', action='version')
 args = parser.parse_args()
 username = args.username
 screenshot = args.screenshot
+videos_count = args.videos_count
 
 if __name__ == "__main__":
     try:
         check_and_get_updates()
-        download_user_videos(username, screenshot)
+        download_user_videos(username, screenshot, videos_count)
 
     except KeyboardInterrupt:
         print("Process interrupted with Ctrl+C.")
