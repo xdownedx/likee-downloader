@@ -78,7 +78,7 @@ def get_user_id(username):
 def get_user_videoId(username):
     driver.get(user_profile_url.format(username))
     """
-    Wait for a maximum of 10 seconds for an element matching the given criteria to be found.
+    Wait for 20 seconds for an element matching the given criteria to be found (we wait for the page to be fully loaded)
     In order to get the videoId, we have to click on a video,
     in this case we click on the first video
     """
