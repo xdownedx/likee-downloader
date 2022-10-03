@@ -13,15 +13,15 @@ from selenium.webdriver.support import expected_conditions
 option = webdriver.FirefoxOptions()
 option.add_argument('--headless')
 driver = webdriver.Firefox(options=option)
-program_version_number = "2022.1.2.0"
+program_version_number = "2022.1.2.1"
 user_profile_url = "https://likee.video/@{}"
 user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
-update_check_endpoint = "https://api.github.com/repos/rly0nheart/Likee-Downloader/releases/latest"
+update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
 
 
 def notice():
     notice_msg = f"""
-Likee-Downloader {program_version_number} Copyright (C) 2022  Richard Mwewa
+likee-downloader {program_version_number} Copyright (C) 2022  Richard Mwewa
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ def check_and_get_updates():
         if update_prompt.lower() == "y":
             files_to_update = ['downloader.py', 'geckodriver.exe', 'README.md', 'requirements.txt']
             for file in tqdm(files_to_update, desc=f'Updating'):
-                data = requests.get(f'https://raw.githubusercontent.com/rly0nheart/Likee-Downloader/master/{file}')
+                data = requests.get(f'https://raw.githubusercontent.com/rly0nheart/likee-downloader/master/{file}')
                 with open(file, "wb") as f:
                     f.write(data.content)
                     f.close()
@@ -113,11 +113,11 @@ def download_user_videos(username, screenshot, videos_count):
     print(f"Complete: {downloaded_videos}/{len(videos)} videos were downloaded.")
 
 
-parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mwewa ')
+parser = argparse.ArgumentParser(description='likee-downloader — by Richard Mwewa ')
 parser.add_argument('username', help='specify target username')
 parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
 parser.add_argument('-c', '--videos-count', help='number of videos to download (default: %(default)s)', default=10, dest='videos_count', type=int)
-parser.add_argument('-v', '--version', version='2022.1.2.0', action='version')
+parser.add_argument('-v', '--version', version='2022.1.2.1', action='version')
 args = parser.parse_args()
 username = args.username
 screenshot = args.screenshot
