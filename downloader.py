@@ -6,12 +6,14 @@ import argparse
 from tqdm import tqdm
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 
 
 option = webdriver.FirefoxOptions()
 option.add_argument('--headless')
 driver = webdriver.Firefox(options=option)
-program_version_number = "2022.1.1.0"
+program_version_number = "2022.1.2.0"
 user_profile_url = "https://likee.video/@{}"
 user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
 update_check_endpoint = "https://api.github.com/repos/rly0nheart/Likee-Downloader/releases/latest"
@@ -76,11 +78,11 @@ def get_user_id(username):
 def get_user_videoId(username):
     driver.get(user_profile_url.format(username))
     """
+    Wait for a maximum of 10 seconds for an element matching the given criteria to be found.
     In order to get the videoId, we have to click on a video,
     in this case we click on the first video
     """
-    time.sleep(20)
-    first_video_element = driver.find_element(By.XPATH, '//div[@class="card-video poster-bg"]')
+    first_video_element = WebDriverWait(driver, 20).until(expected_conditions.presence_of_element_located((By.XPATH, '//div[@class="card-video poster-bg"]')))
     first_video_element.click()
     video_id = driver.current_url[-19:]
     driver.quit()
@@ -115,7 +117,7 @@ parser = argparse.ArgumentParser(description='Likee-Downloader — by Richard Mw
 parser.add_argument('username', help='specify target username')
 parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
 parser.add_argument('-c', '--videos-count', help='number of videos to download (default: %(default)s)', default=10, dest='videos_count', type=int)
-parser.add_argument('-v', '--version', version='2022.1.1.0', action='version')
+parser.add_argument('-v', '--version', version='2022.1.2.0', action='version')
 args = parser.parse_args()
 username = args.username
 screenshot = args.screenshot
