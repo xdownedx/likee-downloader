@@ -40,7 +40,7 @@ def check_and_get_updates():
     else:
         update_prompt = input(f"[?] A new release is available ({response['tag_name']}). Would you like to install it? (y/n) ")
         if update_prompt.lower() == "y":
-            files_to_update = ['downloader.py', 'geckodriver.exe', 'README.md', 'requirements.txt']
+            files_to_update = ['downloader.py', 'geckodriver.exe', 'geckodriver', 'README.md', 'requirements.txt']
             for file in tqdm(files_to_update, desc=f'Updating'):
                 data = requests.get(f'https://raw.githubusercontent.com/rly0nheart/likee-downloader/master/{file}')
                 with open(file, "wb") as f:
