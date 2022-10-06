@@ -1,47 +1,61 @@
 # Likee Downloader
-A script for downloading videos from Likee
+A program for downloading videos from Likee, given a username
 
 ![screenshot](https://user-images.githubusercontent.com/74001397/191549849-07f151c5-4f42-4c71-ae9c-ceabe24c54d3.png)
 
 # Installation
-**1. Clone the project**
+**Install from PyPI**
 ```
-git clone https://github.com/rly0nheart/Likee-Downloader.git
-```
-
-**2. Move to Likee-Downloader directory**
-```
-cd Likee-Downloader
+pip install likee-downloader
 ```
 
-**3. Install dependencies**
-## Note
-> *This will install tqdm, selenium, and requests*
-> > *You will need to have Firefox installed to run the program*
-> > > *For user convenience, the program will come with a geckodriver.exe binary*
+### Note
+> In order to run the program, You will need to have the FireFox browser installed on your pc
+> The program is dependent on selenium, so in order to run it, you will have to download and properly setup geckodriver (setup instructions available below)
+>> 
+
+# Geckodriver setup
+## Linux
+**1. Go to the geckodriver [releases page](https://github.com/mozilla/geckodriver/releases/). Find the latest version of the driver for your platform and download it**
+
+**2. Extract the downloaded file**
 ```
-pip install -r requirements.txt
+tar -xvzf geckodriver*
 ```
+
+**3. Make it executable**
+```
+chmod +x geckodriver
+```
+
+**4. Move the driver to the bin directory**
+```
+mv geckodriver /usr/local/bin/
+```
+
+### Note
+> If you encounter issues with the above commands, then you should run them as root (with sudo)
+
+
+## Windows
+**1. Go to the geckodriver [releases page](https://github.com/mozilla/geckodriver/releases/). Find the geckodriver.exe binary for your platform and download it**
+
+**2. Move the downloaded executable to** *C:\Users\yourusername\AppData\Local\Programs\Python\Python310*
+
+### Note
+> The numbers on the directory 'Python310' will depend on the version of Python you have
+
+## Mac OS
+* [Set up Selenium & GeckoDriver (Mac)](https://medium.com/dropout-analytics/selenium-and-geckodriver-on-mac-b411dbfe61bc)
+
 
 # Usage
 ```
-python downloader.py <username>
+likee_downloader <username>
 ```
 
-> *Alternatively, you could grant execution permission to the downloader and run it as shown below*
-
-**1. Grant execution permission**
-```
-chmod +x downloader.py
-```
-
-**2. Run downloader**
-```
-./downloader.py <username>
-```
-
-## Note
-> Upon run, the downloader will first check for updates. If found, users will be prompted to download the updates
+### Note
+> Upon run, the program will first check for updates. If found, users will be notified about the update
 
 
 # Optional Arguments
@@ -49,7 +63,6 @@ chmod +x downloader.py
 |---------|:-----------:|
 | *-s/--screenshot* | capture a screenshot of the target's profile (bonus feature) |
 | *-c/--videos-count* | number of videos to download (default: 10) |
-| *-v/--version*   | show program's version number and exit |
 
 # Donations
 If you would like to donate, you could Buy A Coffee for the developer using the button below
