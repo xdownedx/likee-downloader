@@ -96,10 +96,8 @@ class LikeeDownloader:
 
 
     def dump_to_json(self, video):
-        video_info = json.dumps(video, indent=4)
         with open(os.path.join('downloads', 'json', f"{self.args.username}_{video['postId']}.json"), 'w') as json_file:
-            json_file.write(video_info)
-            json_file.close()
+            json.dump(video, json_file, indent=4)
         print('\nVideo info dumped:', json_file.name)
             
             
