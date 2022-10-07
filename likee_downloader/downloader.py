@@ -18,6 +18,7 @@ class LikeeDownloader:
         self.parser.add_argument('username', help='username')
         self.parser.add_argument('-s', '--screenshot', help='capture a screenshot of the target\'s profile', action='store_true')
         self.parser.add_argument('-c', '--videos-count', help='number of videos to download (default: %(default)s)', default=10, dest='videos_count', type=int)
+        self.parser.add_argument('-j', '--json', help='dump video info to a json file', action='store_true')
         self.args = self.parser.parse_args()
 
         option = webdriver.FirefoxOptions()
@@ -89,9 +90,17 @@ class LikeeDownloader:
         
         
     def path_finder(self):
-        directory_list = [os.path.join('downloads', 'videos'), os.path.join('downloads', 'screenshots')]
+        directory_list = [os.path.join('downloads', 'videos'), os.path.join('downloads', 'screenshots'), os.path.join('downloads', 'json')]
         for directory in directory_list:
             os.makedirs(directory, exist_ok=True)
+
+
+    def dump_to_json(self, video):
+        video_info = json.dumps(video, indent=4)
+        with open(os.path.join('downloads', 'json', f"{self.args.username}_{video['postId']}.json"), 'w') as json_file:
+            json_file.write(video_info)
+            json_file.close()
+        print('\nVideo info dumped:', json_file.name)
             
             
     def download_user_videos(self):
@@ -107,6 +116,8 @@ class LikeeDownloader:
             print(f'Found: {len(videos)} videos\n')
             for downloading_videos, video in enumerate(videos[:self.args.videos_count], start=1):
                 pprint(video)
+                if self.args.json:
+                    self.dump_to_json(video)
                 """
                 Downloading video and saving it by the username_postId format
                 """
