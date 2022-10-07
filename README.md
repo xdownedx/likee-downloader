@@ -1,3 +1,5 @@
+# THIS PROJECT IS UNDERGOING MAJOR CHANGES AND WILL BE AVAILABLE IN A FEW HOURS
+
 # Likee Downloader
 A script for downloading videos from Likee
 
