@@ -24,7 +24,7 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.3.1"
+        self.program_version_number = "2022.1.3.2"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
@@ -89,7 +89,7 @@ class LikeeDownloader:
         
         
     def path_finder(self):
-        directory_list = ['downloads/videos', 'downloads/screenshots']
+        directory_list = [os.path.join('downloads', 'videos'), os.path.join('downloads', 'screenshots')]
         for directory in directory_list:
             os.makedirs(directory, exist_ok=True)
             
@@ -105,17 +105,13 @@ class LikeeDownloader:
             response = requests.post(self.user_videos_api_endpoint, json=self.get_user_id()[0]).json()
             videos = response['data']['videoList']
             print(f'Found: {len(videos)} videos\n')
-            downloaded_videos = 0
-            downloading_videos = 0
-            for video in videos[:self.args.videos_count]:
-                downloading_videos += 1
+            for downloading_videos, video in enumerate(videos[:self.args.videos_count], start=1):
                 pprint(video)
                 """
                 Downloading video and saving it by the username_postId format
                 """
-                downloaded_videos += 1
                 response = requests.get(video['videoUrl'], stream=True)
-                with open(f"downloads/videos/{self.args.username}_{video['postId']}.mp4", "wb") as file:
+                with open(os.path.join('downloads', 'videos', f"{self.args.username}_{video['postId']}.mp4"), 'wb') as file:
                     for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
                         if chunk:
                             file.write(chunk)
@@ -127,4 +123,3 @@ class LikeeDownloader:
             
         except Exception as e:
             print("An error occured:", e)
-
