@@ -24,7 +24,7 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.3.0"
+        self.program_version_number = "2022.1.3.1"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
