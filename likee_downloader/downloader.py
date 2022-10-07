@@ -25,7 +25,7 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.4.2"
+        self.program_version_number = "2022.1.4.3"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
@@ -54,8 +54,8 @@ class LikeeDownloader:
     def capture_screenshot(self):
         print("Capturing profile screenshot:", self.args.username)
         self.driver.get(self.user_profile_url.format(self.args.username))
-        self.driver.get_screenshot_as_file(f"downloads/screenshots/{self.args.username}_likee-downloader.png")
-        print(f"Captured: downloads/screenshots/{self.args.username}_likee-downloader.png")
+        self.driver.get_screenshot_as_file(os.path.join('downloads', 'screenshots', f'{self.args.username}_likee-downloader.png'))
+        print(f"Screenshot captured: downloads/screenshots/{self.args.username}_likee-downloader.png")
         
         
     def get_user_id(self):
