@@ -28,9 +28,9 @@ tar -xvzf geckodriver*
 chmod +x geckodriver
 ```
 
-**4. Move the driver to the bin directory**
+**4. Add geckodriver to your system path**
 ```
-mv geckodriver /usr/local/bin/
+export PATH=$PATH:/path/to/downloaded/geckodriver
 ```
 
 ### Note
