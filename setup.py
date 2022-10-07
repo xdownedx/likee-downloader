@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as file:
 
 setuptools.setup(
     name='likee-downloader',
-    version='2022.1.3.1',
+    version='2022.1.3.2',
     author='Richard Mwewa',
     author_email='rly0nheart@duck.com',
     packages=['likee_downloader'],
