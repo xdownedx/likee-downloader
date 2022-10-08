@@ -25,7 +25,7 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.4.3"
+        self.program_version_number = "2022.1.4.4"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
@@ -102,33 +102,26 @@ class LikeeDownloader:
             
             
     def download_user_videos(self):
-        try:
-            self.check_updates()
-            self.path_finder()
+        self.check_updates()
+        self.path_finder()
+        
+        if self.args.screenshot:
+            self.capture_screenshot()
             
-            if self.args.screenshot:
-                self.capture_screenshot()
-                
-            response = requests.post(self.user_videos_api_endpoint, json=self.get_user_id()[0]).json()
-            videos = response['data']['videoList']
-            print(f'Found: {len(videos)} videos\n')
-            for downloading_videos, video in enumerate(videos[:self.args.videos_count], start=1):
-                pprint(video)
-                if self.args.json:
-                    self.dump_to_json(video)
-                """
-                Downloading video and saving it by the username_postId format
-                """
-                response = requests.get(video['videoUrl'], stream=True)
-                with open(os.path.join('downloads', 'videos', f"{self.args.username}_{video['postId']}.mp4"), 'wb') as file:
-                    for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
-                        if chunk:
-                            file.write(chunk)
-                print(f"Downloaded: {file.name}\n")
-            print(f"Complete!")
-                
-        except KeyboardInterrupt:
-            print("Process interrupted with Ctrl+C.")
-            
-        except Exception as e:
-            print("An error occured:", e)
+        response = requests.post(self.user_videos_api_endpoint, json=self.get_user_id()[0]).json()
+        videos = response['data']['videoList']
+        print(f'Found: {len(videos)} videos\n')
+        for downloading_videos, video in enumerate(videos[:self.args.videos_count], start=1):
+            pprint(video)
+            if self.args.json:
+                self.dump_to_json(video)
+            """
+            Downloading video and saving it by the username_postId format
+            """
+            response = requests.get(video['videoUrl'], stream=True)
+            with open(os.path.join('downloads', 'videos', f"{self.args.username}_{video['postId']}.mp4"), 'wb') as file:
+                for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
+                    if chunk:
+                        file.write(chunk)
+            print(f"Downloaded: {file.name}\n")
+        print(f"Complete!")
