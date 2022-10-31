@@ -6,15 +6,20 @@ A program for downloading videos from Likee, given a username
 ![screenshot](https://user-images.githubusercontent.com/74001397/191549849-07f151c5-4f42-4c71-ae9c-ceabe24c54d3.png)
 
 # Installation
-**Install from PyPI**
+## Install from PyPI
 ```
 pip install likee-downloader
 ```
-
 ### Note
 > In order to run the program, You will need to have the FireFox browser installed on your pc
-> The program is dependent on selenium, so in order to run it, you will have to download and properly setup geckodriver (setup instructions available below)
->> 
+>> The program is dependent on selenium, so in order to run it, you will have to download and properly setup geckodriver (setup instructions available below)
+
+## Docker
+```
+docker pull rly0nheart/likee-downloader
+```
+### Note
+> Setting up selenium/geckodriver won't be required for the docker image
 
 # Geckodriver setup
 ## Linux
@@ -52,8 +57,14 @@ export PATH=$PATH:/path/to/downloaded/geckodriver
 
 
 # Usage
+## PyPI package
 ```
 likee_downloader <username>
+```
+
+## Docker image
+```
+docker run rly0nheart/likee-downloader <username>
 ```
 
 ### Note
