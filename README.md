@@ -64,7 +64,7 @@ likee_downloader <username>
 
 ## Docker image
 ```
-docker run rly0nheart/likee-downloader <username>
+docker run -it -v -v $PWD/downloads:/app/downloads rly0nheart/likee-downloader <username>
 ```
 
 ### Note
