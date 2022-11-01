@@ -64,7 +64,7 @@ likee_downloader <username>
 
 ## Docker image
 ```
-docker run -it -v -v $PWD/downloads:/app/downloads rly0nheart/likee-downloader <username>
+docker run -it -v $PWD/downloads:/app/downloads rly0nheart/likee-downloader <username>
 ```
 
 ### Note
@@ -76,6 +76,7 @@ docker run -it -v -v $PWD/downloads:/app/downloads rly0nheart/likee-downloader <
 |---------|:-----------:|
 | *-s/--screenshot* | capture a screenshot of the target's profile (bonus feature) |
 | *-c/--videos-count* | number of videos to download (default: 10) |
+| *-j/--json* | dump video info to a json file |
 
 # Donations
 If you would like to donate, you could Buy A Coffee for the developer using the button below
