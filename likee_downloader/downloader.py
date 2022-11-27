@@ -25,7 +25,7 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.4.4"
+        self.program_version_number = "2022.1.4.5"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
@@ -48,7 +48,7 @@ class LikeeDownloader:
             """Ignore if the program is up to date"""
             pass
         else:
-            print(f"[!] A new release is available ({response['tag_name']}). Run 'pip install --upgrade likee-downloader' to get the updates.\n")
+            print(f"[UPDATE] A new release is available ({response['tag_name']}). Run 'pip install --upgrade likee-downloader' to get the updates.\n")
             
             
     def capture_screenshot(self):
