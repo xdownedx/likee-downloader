@@ -1,7 +1,7 @@
 # Likee Downloader
-[![CodeQL](https://github.com/rly0nheart/likee-downloader/actions/workflows/codeql.yml/badge.svg)](https://github.com/rly0nheart/likee-downloader/actions/workflows/codeql.yml)  [![Upload Python Package](https://github.com/rly0nheart/likee-downloader/actions/workflows/python-publish.yml/badge.svg)](https://github.com/rly0nheart/likee-downloader/actions/workflows/python-publish.yml)
-
 A program for downloading videos from Likee, given a username
+
+[![CodeQL](https://github.com/rly0nheart/likee-downloader/actions/workflows/codeql.yml/badge.svg)](https://github.com/rly0nheart/likee-downloader/actions/workflows/codeql.yml)  [![Upload Python Package](https://github.com/rly0nheart/likee-downloader/actions/workflows/python-publish.yml/badge.svg)](https://github.com/rly0nheart/likee-downloader/actions/workflows/python-publish.yml)
 
 ![screenshot](https://user-images.githubusercontent.com/74001397/191549849-07f151c5-4f42-4c71-ae9c-ceabe24c54d3.png)
 
