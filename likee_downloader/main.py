@@ -10,4 +10,4 @@ def downloader():
         print('[CTRLC] Process interrupted with Ctrl+C.')
 
     except Exception as e:
-        print('[ERROR] An error occured:', e)
+        print('[ERROR]', e)

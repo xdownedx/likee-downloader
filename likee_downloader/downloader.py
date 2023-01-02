@@ -25,24 +25,23 @@ class LikeeDownloader:
         option.add_argument('--headless')
         self.driver = webdriver.Firefox(options=option)
         
-        self.program_version_number = "2022.1.4.5"
+        self.program_version_number = "1.5.5"
         self.user_profile_url = "https://likee.video/@{}"
         self.user_videos_api_endpoint = "https://api.like-video.com/likee-activity-flow-micro/videoApi/getUserVideo"
         self.update_check_endpoint = "https://api.github.com/repos/rly0nheart/likee-downloader/releases/latest"
         
     def notice(self):
-        notice_msg = f"""
-    likee-downloader {self.program_version_number} Copyright (C) 2022  Richard Mwewa
+        return f"""
+    likee-downloader v{self.program_version_number} Copyright (C) 2023  Richard Mwewa
     
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
     """
-        print(notice_msg)
         
         
     def check_updates(self):
-        self.notice()
+        print(self.notice())
         response = requests.get(self.update_check_endpoint).json()
         if response['tag_name'] == self.program_version_number:
             """Ignore if the program is up to date"""
@@ -52,14 +51,14 @@ class LikeeDownloader:
             
             
     def capture_screenshot(self):
-        print("Capturing profile screenshot:", self.args.username)
+        print("[INFO] Capturing profile screenshot:", self.args.username)
         self.driver.get(self.user_profile_url.format(self.args.username))
         self.driver.get_screenshot_as_file(os.path.join('downloads', 'screenshots', f'{self.args.username}_likee-downloader.png'))
-        print(f"Screenshot captured: downloads/screenshots/{self.args.username}_likee-downloader.png")
+        print(f"[INFO] Screenshot captured: downloads/screenshots/{self.args.username}_likee-downloader.png")
         
         
     def get_user_id(self):
-        print("Obtaining userId (This may take a while)...")
+        print("[INFO] Obtaining userId...")
         response = requests.get(f"{self.user_profile_url.format(self.args.username)}/video/{self.get_user_videoId()}")
         regex_pattern = re.compile('window.data = ({.*?});', flags=re.DOTALL | re.MULTILINE)
         str_data = regex_pattern.search(response.text).group(1)
@@ -71,7 +70,7 @@ class LikeeDownloader:
                    "tabType": 0,
                    "uid": json_data['uid']
                    }
-        print(f"userId obtained: {json_data['uid']}")
+        print(f"[INFO] userId obtained: {json_data['uid']}")
         return payload, json_data['uid']
         
         
@@ -98,7 +97,7 @@ class LikeeDownloader:
     def dump_to_json(self, video):
         with open(os.path.join('downloads', 'json', f"{self.args.username}_{video['postId']}.json"), 'w', encoding='utf-8') as json_file:
             json.dump(video, json_file, indent=4, ensure_ascii=False)
-        print('\nVideo info dumped:', json_file.name)
+        print('\n[DUMPED] Video info dumped:', json_file.name)
             
             
     def download_user_videos(self):
@@ -110,7 +109,7 @@ class LikeeDownloader:
             
         response = requests.post(self.user_videos_api_endpoint, json=self.get_user_id()[0]).json()
         videos = response['data']['videoList']
-        print(f'Found: {len(videos)} videos\n')
+        print(f'[FOUND] Found: {len(videos)} videos\n')
         for downloading_videos, video in enumerate(videos[:self.args.videos_count], start=1):
             pprint(video)
             if self.args.json:
@@ -120,8 +119,8 @@ class LikeeDownloader:
             """
             response = requests.get(video['videoUrl'], stream=True)
             with open(os.path.join('downloads', 'videos', f"{self.args.username}_{video['postId']}.mp4"), 'wb') as file:
-                for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
+                for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"[INFO] Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
                     if chunk:
                         file.write(chunk)
-            print(f"Downloaded: {file.name}\n")
-        print(f"Complete!")
+            print(f"[INFO] Downloaded: {file.name}\n")
+        print(f"[INFO] Complete!")
