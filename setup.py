@@ -12,7 +12,7 @@ setuptools.setup(
     description='Likee video downloader',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/rly0nheart/likee-downloader',
+    url='https://github.com/bellingcat/likee-downloader',
     license='GNU General Public License v3 (GPLv3)',
     install_requires=['requests', 'selenium', 'tqdm'],
     classifiers=[
