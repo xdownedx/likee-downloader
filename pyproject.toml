@@ -32,4 +32,4 @@ documentation = "https://github.com/bellingcat/likee-downloader/blob/master/READ
 repository = "https://github.com/bellingcat/likee-downloader.git"
 
 [project.scripts]
-octosuite = "likee_downloader.main:downloader"
+likee_downloader = "likee_downloader.main:downloader"
