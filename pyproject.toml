@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "likee-downloader"
+version = "1.5.5"
+description = "Likee video downloader"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+keywords = ["likee", "python", "likee-video-downloader", "likee-downloader", "osint-python", "osint-tool"]
+authors = [{name = "Richard Mwewa", email = "rly0nheart@duck.com"}]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Operating System :: OS Independent",
+  "Natural Language :: English"
+]
+
+dependencies = [
+    "tqdm",
+    "selenium",
+    "requests",
+]
+
+[project.urls]
+homepage = "https://github.com/bellingcat/likee-downloader"
+documentation = "https://github.com/bellingcat/likee-downloader/blob/master/README.md"
+repository = "https://github.com/bellingcat/likee-downloader.git"
+
+[project.scripts]
+likee_downloader = "likee_downloader.main:downloader"
