@@ -1,3 +1,6 @@
+# Note
+**likee-downloader is no longer working, due to anti-scraping changes on the [likee website](https://likee.video). I will start working on an alternative solution.**
+
 # Likee Downloader
 A program for downloading videos from Likee, given a username
 
