@@ -117,7 +117,7 @@ class LikeeDownloader:
             """
             Downloading video and saving it by the username_postId format
             """
-            response = requests.get(video['videoUrl'], stream=True)
+            response = requests.get(video['videoUrl'].replace("_4", ""), stream=True)
             with open(os.path.join('downloads', 'videos', f"{self.args.username}_{video['postId']}.mp4"), 'wb') as file:
                 for chunk in tqdm(response.iter_content(chunk_size=1024 * 1024), desc=f"[INFO] Downloading {downloading_videos}/{self.args.videos_count}: {video['postId']}.mp4"):
                     if chunk:
